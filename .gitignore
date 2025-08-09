@@ -1,0 +1,35 @@
+# Quartus build artifacts
+/db/
+/incremental_db/
+/output_files/
+/simulation/
+/*.rpt
+*.qws
+*.smsg
+*.srf
+*.bak
+*.qdf
+*.cmp
+*.jdi
+*.sof
+*.pof
+*.cdf
+*.sopcinfo
+*.pin
+*.eqn
+*.eda
+*.hex
+*.pmsf
+*.fsf
+*.log
+
+# ModelSim/Questa (if used)
+/work/
+vsim.wlf
+transcript
+
+# OS/editor junk
+.DS_Store
+Thumbs.db
+*.tmp
+*.swp
