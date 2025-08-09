@@ -8,57 +8,33 @@
 
 
 
-```mermaid
-
 flowchart LR
-
-&nbsp; S\[Sensor (I²C)] -->|SDA/SCL| I2C\[I²C Master]
-
-&nbsp; I2C --> REG\[Data Registers]
-
-&nbsp; REG --> PROC\[Processing Block]
-
-&nbsp; PROC --> UART\[UART TX]
-
-&nbsp; UART --> PC\[PC (USB-UART)]
-
-&nbsp; PROC --> LEDS\[LEDs (debug)]
-
-&nbsp; CLK\[\[50 MHz CLK]] --> I2C \& PROC \& UART
-
-&nbsp; RST\[\[Reset Sync]] --> I2C \& PROC \& UART
+  S[Sensor (I²C)] -->|SDA/SCL| I2C[I²C Master]
+  I2C --> REG[Data Registers]
+  REG --> PROC[Processing Block]
+  PROC --> UART[UART TX]
+  UART --> PC[PC (USB‑UART)]
+  PROC --> LEDS[LEDs (debug)]
+  CLK[[50 MHz CLK]] --> I2C & PROC & UART
+  RST[[Reset Sync]] --> I2C & PROC & UART
 
 Modules (planned)
 
-top.v — top-level, pin hookups, reset sync
+top.v — glue logic, pin hookups, reset sync.
 
+clk_rst_sync.v — reset synchronizer & optional clock divs.
 
+i2c_master.v — simple I²C master (you can start with 100 kHz, 7‑bit addr).
 
-clk\_rst\_sync.v — reset synchronizer / optional div
+i2c_regs.v — capture sensor bytes into readable registers.
 
+proc_block.v — any light processing/formatting (e.g., scale, checksum).
 
+uart_tx.v — 8‑N‑1 transmitter with baud generator (115200 default).
 
-i2c\_master.v — 100 kHz, 7-bit master
+led_debug.v — maps status/flags to LEDs.
 
-
-
-i2c\_regs.v — capture sensor bytes
-
-
-
-proc\_block.v — light processing/formatting
-
-
-
-baud\_gen.v — tick from 50 MHz for UART
-
-
-
-uart\_tx.v — 8-N-1 transmitter (115200)
-
-
-
-led\_debug.v — status → LEDs
+baud_gen.v — tick generator from 50 MHz for UART.
 
 
 
